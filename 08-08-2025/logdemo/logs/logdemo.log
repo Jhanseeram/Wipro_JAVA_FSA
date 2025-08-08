@@ -1,0 +1,46 @@
+2025-08-08T12:22:24.963+05:30  WARN 14136 --- [logdemo] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2025-08-08T12:22:24.990+05:30  WARN 14136 --- [logdemo] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-08-08T12:22:25.061+05:30 ERROR 14136 --- [logdemo] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-08-08T12:23:02.366+05:30  WARN 18632 --- [logdemo] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2025-08-08T12:23:02.398+05:30  WARN 18632 --- [logdemo] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-08-08T12:23:02.448+05:30 ERROR 18632 --- [logdemo] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-08-08T12:25:03.531+05:30 ERROR 26184 --- [logdemo] [http-nio-8080-exec-1] c.w.logdemo.controller.HomeController    : --Error--
+2025-08-08T12:25:03.532+05:30  WARN 26184 --- [logdemo] [http-nio-8080-exec-1] c.w.logdemo.controller.HomeController    : --WARN--
+2025-08-08T12:57:38.768+05:30 ERROR 26184 --- [logdemo] [http-nio-8080-exec-1] c.w.logdemo.controller.HomeController    : --Error--
+2025-08-08T12:57:38.769+05:30  WARN 26184 --- [logdemo] [http-nio-8080-exec-1] c.w.logdemo.controller.HomeController    : --WARN--
+2025-08-08T13:59:36.534+05:30 ERROR 26184 --- [logdemo] [http-nio-8080-exec-4] c.w.logdemo.controller.HomeController    : --Error--
+2025-08-08T13:59:36.536+05:30  WARN 26184 --- [logdemo] [http-nio-8080-exec-4] c.w.logdemo.controller.HomeController    : --WARN--
+2025-08-08T14:03:11.055+05:30 ERROR 27068 --- [logdemo] [http-nio-8080-exec-1] c.w.logdemo.controller.HomeController    : --Error--
+2025-08-08T14:03:11.057+05:30  WARN 27068 --- [logdemo] [http-nio-8080-exec-1] c.w.logdemo.controller.HomeController    : --WARN--
+2025-08-08T14:03:14.832+05:30 ERROR 27068 --- [logdemo] [http-nio-8080-exec-2] c.w.logdemo.controller.HomeController    : --Error--
+2025-08-08T14:03:14.837+05:30  WARN 27068 --- [logdemo] [http-nio-8080-exec-2] c.w.logdemo.controller.HomeController    : --WARN--
+2025-08-08T14:04:24.715+05:30 ERROR 27068 --- [logdemo] [http-nio-8080-exec-2] c.w.logdemo.controller.HomeController    : --Error--
+2025-08-08T14:04:24.716+05:30  WARN 27068 --- [logdemo] [http-nio-8080-exec-2] c.w.logdemo.controller.HomeController    : --WARN--
+2025-08-08T14:04:25.525+05:30 ERROR 27068 --- [logdemo] [http-nio-8080-exec-3] c.w.logdemo.controller.HomeController    : --Error--
+2025-08-08T14:04:25.525+05:30  WARN 27068 --- [logdemo] [http-nio-8080-exec-3] c.w.logdemo.controller.HomeController    : --WARN--
