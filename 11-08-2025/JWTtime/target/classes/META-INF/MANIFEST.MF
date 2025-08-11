@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: Jhansee Ram
+Build-Jdk: 21.0.8
+Implementation-Title: JWTtime
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.wipro
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/time-service
+Created-By: Maven Integration for Eclipse
+
