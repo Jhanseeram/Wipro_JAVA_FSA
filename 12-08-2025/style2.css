@@ -1,0 +1,17 @@
+.container{
+    margin-top: 20px;
+    border: 1px solid black;
+    margin-bottom: 50px;
+}
+
+.div2 {
+    margin-top: 10px;
+    border: 1px solid black;
+    margin-bottom: 70px;
+}
+
+.div1 {
+    margin-top: 10px;
+    border: 5px solid rgb(202, 0, 0);
+    margin-bottom: 70px;
+}

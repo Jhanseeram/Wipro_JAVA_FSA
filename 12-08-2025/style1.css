@@ -1,0 +1,17 @@
+p,h1{
+    color: rgb(251, 11, 15);
+    font-size: 24px;
+}
+.blue-heading {
+    color: rgb(89, 0, 255);
+    font-size: 30px;
+}
+#heading2 {
+    color: rgb(255, 123, 0);
+    font-size: 40px;
+}
+*{
+    font-family:monospace;
+    color: black;
+    
+}

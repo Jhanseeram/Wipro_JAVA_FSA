@@ -1,0 +1,22 @@
+/* Custom tweaks for Simple Store Bootstrap site */
+body { background: #f8f9fa; }
+.navbar-brand { letter-spacing: 1px; }
+.hero, .bg-hero {
+  background: linear-gradient(135deg, #EDF2F4 0%, #fff 100%);
+}
+.btn-danger, .btn-outline-danger:hover {
+  background-color: #D90429 !important;
+  border-color: #D90429 !important;
+}
+.btn-outline-danger {
+  color: #D90429 !important;
+  border-color: #D90429 !important;
+  background: #fff !important;
+}
+.btn-outline-danger:active, .btn-outline-danger:focus {
+  background: #D90429 !important;
+  color: #fff !important;
+}
+.card-title { font-weight: 600; }
+.card .price, .fw-bold.text-danger { color: #D90429 !important; }
+footer { font-size: 1rem; }
