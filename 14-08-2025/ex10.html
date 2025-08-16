@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rest operator</title>
+</head>
+<body>
+    <script>
+        function sumNumbers(...numbers) {
+    return numbers.reduce((sum, num) => sum + num, 0);
+}
+    console.log(sumNumbers(10, 20, 30, 40)); 
+
+    //ex11
+    function separateFirstRest(...args) {
+    const [first, ...rest] = args;
+    return { first, rest };
+}
+
+    console.log(separateFirstRest(10, 20, 30, 40));
+
+
+    </script>
+</body>
+</html>

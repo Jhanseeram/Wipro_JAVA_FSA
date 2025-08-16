@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Account</title>
+</head>
+<body>
+    <script>    
+class Vehicle{
+            constructor(make,model,year){
+                this.make = make;
+                this.model = model;
+                this.year = year;
+            }
+
+            getInfo(){
+                return `Vehicle Info: ${this.year} ${this.make} ${this.model}`;
+            }
+        }
+
+           class Car extends Vehicle {
+        constructor(make, model, year, numDoors) {
+            super(make, model, year);
+            this.numDoors = numDoors;
+        }
+
+        getInfo() {
+            return `${super.getInfo()}, Doors: ${this.numDoors}`;
+        }
+    }
+
+    const myCar = new Car("Toyota", "A1", 2022, 4);
+    console.log(myCar.getInfo());
+        
+    </script>
+</body>
+</html>
+
+
+    </script>
+</body>
+</html>

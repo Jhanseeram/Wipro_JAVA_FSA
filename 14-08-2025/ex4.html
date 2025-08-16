@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Account</title>
+</head>
+<body>
+    <script>    
+        class BankAccount{
+            constructor(accountNumber, balance = 0) {
+                this.accountNumber = accountNumber;
+                this.balance = balance;
+            }
+
+            deposit(amount) {
+                this.balance += amount;
+                console.log(`Deposited: Rs.${amount}`);
+            }
+
+            withdraw(amount) {
+                if (amount > this.balance) {
+                    console.log("Insufficient funds");
+                } else {
+                    this.balance -= amount;
+                    console.log(`Withdrew: Rs.${amount}`);
+                }
+            }
+
+            getBalance() {
+                return this.balance;
+            }
+        }
+
+        const account1 = new BankAccount("123456789", 1000);
+        account1.deposit(500);
+        account1.withdraw(200);
+        console.log(`Current Balance: Rs.${account1.getBalance()}`);
+
+
+
+        
+
+    </script>
+</body>
+</html>
+
+
+    </script>
+</body>
+</html>
