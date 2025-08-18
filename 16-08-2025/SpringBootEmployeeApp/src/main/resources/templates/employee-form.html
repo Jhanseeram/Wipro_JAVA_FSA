@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employee Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<h2 th:text="${employee.id == null ? 'Add Employee' : 'Edit Employee'}"></h2>
+<form th:action="${employee.id == null} ? @{/employees} : @{'/employees/edit/' + ${employee.id}}" th:object="${employee}" method="post">
+    <label>Name:</label>
+    <input type="text" th:field="*{name}" required /> <br/>
+    <label>Type:</label>
+    <select th:field="*{type}">
+        <option value="CONTRACT">Contract</option>
+        <option value="REGULAR">Regular</option>
+    </select> <br/>
+    <label>Department Name:</label>
+    <input type="text" th:field="*{department.name}" /> <br/>
+    <label>Address City:</label>
+    <input type="text" th:field="*{address.city}" /> <br/>
+    <button type="submit">Submit</button>
+</form>
+<a th:href="@{/employees}">Back to List</a>
+</body>
+</html>
