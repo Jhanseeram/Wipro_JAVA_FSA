@@ -1,0 +1,25 @@
+{
+    "folders": [
+        {
+            "name": "Product Management Backend",
+            "path": "./productmgmtboot"
+        },
+        {
+            "name": "Product Management Frontend", 
+            "path": "./product-management-app"
+        }
+    ],
+    "settings": {
+        "java.configuration.updateBuildConfiguration": "interactive",
+        "java.compile.nullAnalysis.mode": "automatic",
+        "java.configuration.runtimes": [],
+        "typescript.preferences.importModuleSpecifier": "relative"
+    },
+    "extensions": {
+        "recommendations": [
+            "vscjava.vscode-java-pack",
+            "angular.ng-template",
+            "ms-vscode.vscode-typescript-next"
+        ]
+    }
+}

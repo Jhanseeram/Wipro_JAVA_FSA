@@ -1,0 +1,13 @@
+<div *ngIf="product; else loading">
+  <h2 class="h4 text-danger mb-3">Delete Product</h2>
+  <div class="card border-danger mb-3">
+    <div class="card-body">
+      <p class="mb-3">Delete <strong>{{ product.name }}</strong>? This cannot be undone.</p>
+      <button class="btn btn-danger me-2" (click)="remove()">Delete</button>
+      <a routerLink="/products" class="btn btn-secondary">Cancel</a>
+    </div>
+  </div>
+</div>
+<ng-template #loading>
+  <div class="alert alert-warning">Loading...</div>
+</ng-template>

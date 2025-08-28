@@ -1,0 +1,44 @@
+<div class="container">
+  <h2>Product Details</h2>
+  
+  <div *ngIf="product" class="product-details">
+    <div class="detail-card">
+      <div class="detail-row">
+        <label>Product ID:</label>
+        <span class="id-badge">{{product.id}}</span>
+      </div>
+      
+      <div class="detail-row">
+        <label>Product Name:</label>
+        <span class="product-name">{{product.name}}</span>
+      </div>
+      
+      <div class="detail-row">
+        <label>Category:</label>
+        <span class="category-badge">{{product.category}}</span>
+      </div>
+      
+      <div class="detail-row">
+        <label>Price:</label>
+        <span class="price">${{product.price}}</span>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="!product" class="loading">
+    <div class="spinner"></div>
+    <p>Loading product details...</p>
+  </div>
+  
+  <div class="actions">
+    <button class="btn btn-primary" [routerLink]="['/products/edit', product.id]" *ngIf="product">
+      Update Product
+    </button>
+    <button class="btn btn-secondary" [routerLink]="['/products']">
+      Back to Products
+    </button>
+    <button class="btn btn-danger" [routerLink]="['/products/delete', product.id]" *ngIf="product">
+      Delete Product
+    </button>
+  </div>
+</div>

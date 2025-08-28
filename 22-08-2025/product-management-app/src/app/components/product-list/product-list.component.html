@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="header">
+    <h2>Product Management</h2>
+    <div class="actions">
+      <button class="btn btn-success" [routerLink]="['/products/add']">
+        Add New Product
+      </button>
+    </div>
+  </div>
+  
+  <div class="table-container" *ngIf="products.length > 0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Product Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products" class="product-row">
+          <td class="id-cell">{{product.id}}</td>
+          <td class="name-cell">{{product.name}}</td>
+          <td>
+            <span class="category-badge">{{product.category}}</span>
+          </td>
+          <td class="price-cell">${{product.price}}</td>
+          <td class="action-cell">
+            <button class="btn btn-sm btn-primary" [routerLink]="['/products/edit', product.id]" title="Update Product">
+              Update
+            </button>
+            <button class="btn btn-sm btn-danger" [routerLink]="['/products/delete', product.id]" title="Delete Product">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div *ngIf="products.length === 0" class="no-data">
+    <h3>No Products Found</h3>
+    <p>Get started by adding your first product!</p>
+    <button class="btn btn-primary btn-lg" [routerLink]="['/products/add']">
+      Add First Product
+    </button>
+  </div>
+</div>

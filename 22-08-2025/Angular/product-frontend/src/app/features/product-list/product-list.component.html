@@ -1,0 +1,29 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="h4 mb-0">Products</h2>
+  <a class="btn btn-primary" routerLink="/products/add">Add</a>
+</div>
+<div *ngIf="loading" class="text-center py-4">
+  <div class="spinner-border" role="status"></div>
+</div>
+<div *ngIf="!loading && error" class="alert alert-danger">{{ error }}</div>
+<table *ngIf="!loading && products.length" class="table table-striped table-sm align-middle">
+  <thead class="table-dark">
+    <tr>
+  <th>ID</th><th>Name</th><th>Category</th><th class="text-end">Qty</th><th class="text-end">Price</th><th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of products">
+      <td>{{ p.id }}</td>
+      <td>{{ p.name }}</td>
+      <td>{{ p.category }}</td>
+  <td class="text-end">{{ p.qty ?? 0 }}</td>
+      <td class="text-end">{{ p.price | number:'1.2-2' }}</td>
+      <td class="text-end">
+        <a class="btn btn-sm btn-outline-warning me-1" [routerLink]="['/products/edit', p.id]">Edit</a>
+        <a class="btn btn-sm btn-outline-danger" [routerLink]="['/products/delete', p.id]">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div *ngIf="!loading && !products.length" class="alert alert-info">No products yet.</div>
