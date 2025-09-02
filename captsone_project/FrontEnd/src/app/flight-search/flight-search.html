@@ -1,0 +1,182 @@
+<div class="container mt-5">
+  <!-- Header text -->
+  <div class="row mb-4">
+    <div class="col-12 text-center">
+      <h3 class="mb-3">Flight Search</h3>
+      <p>Find the best flights for your journey</p>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card search-card">
+        <div class="card-body">
+          <div class="row g-3">
+            <!-- Trip Type Selection -->
+            <div class="col-12 mb-3">
+              <div class="trip-type-container">
+                <div class="trip-type" [class.active]="tripType === 'round'" (click)="selectTripType('round')">
+                  <i class="bi bi-arrow-left-right"></i>
+                  <span>Round Trip</span>
+                </div>
+                <div class="trip-type" [class.active]="tripType === 'oneway'" (click)="selectTripType('oneway')">
+                  <i class="bi bi-arrow-right"></i>
+                  <span>One Way</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Validation Message -->
+            <div class="col-12" *ngIf="showValidationMessage">
+              <div class="alert alert-warning" role="alert">
+                <i class="bi bi-exclamation-triangle me-2"></i>
+                {{ validationMessage }}
+              </div>
+            </div>
+            
+            <!-- From Location -->
+            <div class="col-md-5">
+              <div class="location-container from-location-container">
+                <label for="fromLocation" class="location-label">FROM</label>
+                <div class="input-with-dropdown">
+                  <input
+                    type="text"
+                    class="form-control location-input"
+                    id="fromLocation"
+                    [(ngModel)]="fromLocation"
+                    (input)="onFromLocationInput()"
+                    (focus)="toggleFromDropdown()"
+                    placeholder="Enter city or airport"
+                  />
+                  <div class="dropdown-icon" (click)="toggleFromDropdown()">
+                    <i class="bi" [ngClass]="{'bi-chevron-up': showFromDropdown, 'bi-chevron-down': !showFromDropdown}"></i>
+                  </div>
+                </div>
+                <div class="location-details">
+                  {{ fromLocationDetails }}
+                </div>
+                <!-- Airport Dropdown -->
+                <div *ngIf="showFromDropdown" class="airport-dropdown">
+                  <div *ngIf="filteredFromAirports.length === 0" class="no-results">
+                    No airports found
+                  </div>
+                  <div *ngFor="let airport of filteredFromAirports" 
+                       class="airport-item"
+                       (click)="selectFromAirport(airport)">
+                    <div class="airport-code">{{ airport.code }}</div>
+                    <div class="airport-info">
+                      <div class="airport-name">{{ airport.name }}</div>
+                      <div class="airport-location">{{ airport.city }}, {{ airport.country }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Swap button - Positioned between From and To -->
+            <div class="col-md-2 d-flex align-items-center justify-content-center">
+              <button class="btn swap-btn" (click)="swapLocations()">
+                <i class="bi bi-arrow-left-right"></i>
+              </button>
+            </div>
+            
+            <!-- To Location -->
+            <div class="col-md-5">
+              <div class="location-container to-location-container">
+                <label for="toLocation" class="location-label">TO</label>
+                <div class="input-with-dropdown">
+                  <input
+                    type="text"
+                    class="form-control location-input"
+                    id="toLocation"
+                    [(ngModel)]="toLocation"
+                    (input)="onToLocationInput()"
+                    (focus)="toggleToDropdown()"
+                    placeholder="Enter city or airport"
+                  />
+                  <div class="dropdown-icon" (click)="toggleToDropdown()">
+                    <i class="bi" [ngClass]="{'bi-chevron-up': showToDropdown, 'bi-chevron-down': !showToDropdown}"></i>
+                  </div>
+                </div>
+                <div class="location-details">
+                  {{ toLocationDetails }}
+                </div>
+                <!-- Airport Dropdown -->
+                <div *ngIf="showToDropdown" class="airport-dropdown">
+                  <div *ngIf="filteredToAirports.length === 0" class="no-results">
+                    No airports found
+                  </div>
+                  <div *ngFor="let airport of filteredToAirports" 
+                       class="airport-item"
+                       (click)="selectToAirport(airport)">
+                    <div class="airport-code">{{ airport.code }}</div>
+                    <div class="airport-info">
+                      <div class="airport-name">{{ airport.name }}</div>
+                      <div class="airport-location">{{ airport.city }}, {{ airport.country }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Departure Date -->
+            <div class="col-md-6">
+              <div class="date-container">
+                <label class="date-label">DEPARTURE</label>
+                <div class="date-display" (click)="openCalendar()">
+                  <div class="date-day">{{ departureDay }}</div>
+                  <div class="date-info">
+                    <div class="date-month-year">{{ departureMonthYear }}</div>
+                    <div class="date-weekday">{{ departureWeekday }}</div>
+                  </div>
+                  <div class="calendar-icon">
+                    <i class="bi bi-calendar3"></i>
+                  </div>
+                </div>
+                <!-- Calendar Popup -->
+                <div *ngIf="showCalendar" class="calendar-popup">
+                  <div class="calendar-header">
+                    <button class="btn btn-sm calendar-nav-btn" (click)="prevMonth()">
+                      <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <div class="calendar-title">
+                      {{calendarMonth}} {{calendarYear}}
+                    </div>
+                    <button class="btn btn-sm calendar-nav-btn" (click)="nextMonth()">
+                      <i class="bi bi-chevron-right"></i>
+                    </button>
+                  </div>
+                  <div class="weekday-header">
+                    <div class="weekday" *ngFor="let day of weekdays">{{day}}</div>
+                  </div>
+                  <div class="days-grid">
+                    <div 
+                      *ngFor="let day of calendarDays" 
+                      class="day"
+                      [class.empty]="day.date === null"
+                      [class.selected]="day.selected"
+                      [class.today]="day.today"
+                      [class.past-date]="day.isPastDate"
+                      [class.disabled]="day.isPastDate"
+                      (click)="day.date && !day.isPastDate && selectDate(day)"
+                    >
+                      {{day.date}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Search Button -->
+            <div class="col-md-6 d-flex align-items-end">
+              <button class="btn search-btn w-100" (click)="searchFlights()">
+                <i class="bi bi-search me-2"></i>
+                Search Flights
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

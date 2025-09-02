@@ -1,0 +1,293 @@
+.booking-container {
+  width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.flight-ticket {
+  flex: 2;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background: white;
+}
+
+.passenger-details {
+  flex: 1;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background: white;
+}
+
+.ticket-header {
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.ticket-header h2 {
+  margin: 0 0 5px;
+  color: #333;
+  font-size: 1.4rem;
+}
+
+.flight-date {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.flight-type {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 2px;
+}
+
+.airline-info {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.airline-logo {
+  width: 40px;
+  height: 40px;
+  background-color: #d32f2f;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 4px;
+  margin-right: 15px;
+}
+
+.airline-details {
+  font-size: 0.9rem;
+}
+
+.airline-name {
+  font-weight: 600;
+}
+
+.flight-number, .aircraft-type {
+  color: #777;
+  font-size: 0.8rem;
+}
+
+.flight-details {
+  padding: 20px 15px;
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.departure, .arrival {
+  flex: 1;
+}
+
+.time {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.location {
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+.airport {
+  font-size: 0.8rem;
+  color: #777;
+  margin-top: 3px;
+}
+
+.duration-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+  position: relative;
+}
+
+.duration-line::before {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: #e0e0e0;
+  position: absolute;
+  top: 10px;
+}
+
+.duration {
+  background-color: white;
+  padding: 0 10px;
+  font-size: 0.8rem;
+  color: #777;
+  position: relative;
+  margin-top: 20px;
+}
+
+.baggage-info {
+  display: flex;
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.cabin-baggage, .check-in-baggage {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.baggage-icon {
+  margin-right: 5px;
+  font-style: normal;
+  color: #4caf50;
+}
+
+.ticket-footer {
+  display: flex;
+  padding: 15px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price-label {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.price-amount {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.pay-button {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pay-button:hover {
+  background-color: #1976d2;
+}
+
+/* Passenger details form */
+h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2196f3;
+}
+
+/* Validation styles */
+.required {
+  color: #dc3545;
+}
+
+.form-control.is-invalid {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.invalid-feedback {
+  display: block;
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+
+.form-text {
+  font-size: 0.75rem;
+  color: #6c757d;
+  margin-top: 3px;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+.form-validation-summary {
+  margin-top: 15px;
+}
+
+.alert {
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.alert ul {
+  margin: 5px 0 0;
+  padding-left: 20px;
+}
+
+.alert li {
+  margin: 2px 0;
+}
+
+/* Form control states */
+.form-control:valid {
+  border-color: #28a745;
+}
+
+.form-control:valid:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+/* Disable submit button when form is invalid */
+.pay-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.pay-button:disabled:hover {
+  background-color: #6c757d;
+}

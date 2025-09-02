@@ -1,0 +1,405 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css");
+
+/* General styling */
+.search-card {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: none;
+}
+
+/* Trip type styling */
+.trip-type-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.trip-type {
+  padding: 8px 16px;
+  border-radius: 30px;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+}
+
+.trip-type i {
+  font-size: 14px;
+}
+
+.trip-type.active {
+  background-color: #1a73e8;
+  color: white;
+}
+
+/* Location styling */
+.location-container {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.location-label {
+  font-weight: 500;
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.input-with-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.location-input {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px 12px;
+  padding-right: 35px;
+  height: 45px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.location-input:focus {
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+  border-color: #1a73e8;
+}
+
+.dropdown-icon {
+  position: absolute;
+  right: 10px;
+  color: #666;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.location-details {
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* Airport dropdown styling */
+.airport-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  margin-top: 5px;
+}
+
+.airport-item {
+  display: flex;
+  padding: 10px 15px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.airport-item:last-child {
+  border-bottom: none;
+}
+
+.airport-item:hover {
+  background-color: #f5f9ff;
+}
+
+.airport-code {
+  font-weight: bold;
+  color: #1a73e8;
+  margin-right: 10px;
+  font-size: 16px;
+  min-width: 45px;
+}
+
+.airport-info {
+  flex: 1;
+}
+
+.airport-name {
+  font-size: 14px;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.airport-location {
+  font-size: 12px;
+  color: #666;
+}
+
+.no-results {
+  padding: 15px;
+  text-align: center;
+  color: #666;
+}
+
+/* Swap button */
+.swap-btn {
+  width: 45px;
+  height: 45px;
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  background-color: white;
+  transition: all 0.2s;
+  margin-top: 20px;
+}
+
+.swap-btn i {
+  font-size: 18px;
+  color: #1a73e8;
+}
+
+.swap-btn:hover {
+  background-color: #f0f7ff;
+  border-color: #1a73e8;
+  box-shadow: 0 2px 6px rgba(26, 115, 232, 0.2);
+}
+
+/* Date display styling */
+.date-container {
+  position: relative;
+}
+
+.date-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  height: 45px;
+  transition: all 0.2s;
+}
+
+.date-display:hover {
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.1);
+}
+
+.date-day {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1;
+  color: #1a73e8;
+  min-width: 30px;
+  text-align: center;
+}
+
+.date-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.date-month-year {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.date-weekday {
+  font-size: 12px;
+  color: #666;
+}
+
+.calendar-icon {
+  color: #666;
+  margin-left: auto;
+}
+
+.calendar-icon i {
+  font-size: 18px;
+}
+
+/* Calendar popup styling */
+.calendar-popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  width: 300px;
+  padding: 15px;
+  margin-top: 8px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.calendar-title {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.calendar-nav-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  color: #666;
+}
+
+.calendar-nav-btn:hover {
+  background-color: #f5f5f5;
+}
+
+.weekday-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.weekday {
+  text-align: center;
+  font-weight: 500;
+  font-size: 12px;
+  padding: 5px;
+  color: #666;
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.day {
+  text-align: center;
+  padding: 7px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.day:hover:not(.empty) {
+  background-color: #f0f7ff;
+}
+
+.day.selected {
+  background-color: #1a73e8;
+  color: white;
+}
+
+.day.today:not(.selected) {
+  border: 1px solid #1a73e8;
+}
+
+.day.empty {
+  cursor: default;
+}
+
+/* Past date styling */
+.day.past-date {
+  color: #ccc !important;
+  background-color: #f8f9fa !important;
+  cursor: not-allowed !important;
+}
+
+.day.past-date:hover {
+  background-color: #f8f9fa !important;
+  color: #ccc !important;
+}
+
+.day.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Search button */
+.search-btn {
+  background-color: #1a73e8;
+  border-color: #1a73e8;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  height: 45px;
+  transition: all 0.2s;
+  color: white;
+}
+
+.search-btn:hover {
+  background-color: #0d66da;
+  border-color: #0d66da;
+  box-shadow: 0 4px 10px rgba(26, 115, 232, 0.3);
+}
+
+.search-btn i {
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+/* Notes styling */
+.search-note, .calendar-note {
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+}
+
+/* Validation alert styles */
+.validation-alert {
+  border: 1px solid #dc3545;
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  margin-top: 8px;
+  position: relative;
+}
+
+.validation-alert .alert-icon {
+  margin-right: 6px;
+  color: #dc3545;
+}
+
+/* Trip type button improvements */
+.trip-type-selector .btn {
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.trip-type-selector .btn.active {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.trip-type-selector .btn:hover:not(.active) {
+  background-color: #f8f9fa;
+  border-color: #0056b3;
+}

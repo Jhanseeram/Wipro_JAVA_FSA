@@ -1,0 +1,191 @@
+/* Filter styles */
+.filters-container {
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+}
+
+.filter-heading {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.clear-btn {
+  background: none;
+  border: none;
+  color: #1a73e8;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.filter-tag {
+  display: inline-flex;
+  align-items: center;
+  background-color: #f0f7ff;
+  border: 1px solid #d0e2ff;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: #1a73e8;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.filter-tag .btn-close {
+  font-size: 10px;
+  padding: 0;
+  width: 15px;
+  height: 15px;
+}
+
+.filter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.filter-item {
+  font-size: 14px;
+}
+
+.form-check-input {
+  cursor: pointer;
+}
+
+.form-check-label {
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.filter-price {
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.more-filters-btn {
+  background: none;
+  border: none;
+  color: #1a73e8;
+  font-size: 13px;
+  text-align: left;
+  padding: 5px 0;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* Flight results styles */
+.flight-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.flight-card {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.flight-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.airline-logo {
+  height: 20px;
+  width: auto;
+  margin-right: 5px;
+}
+
+.airline-logo-lg {
+  height: 30px;
+  width: auto;
+  margin-bottom: 5px;
+}
+
+.flight-number {
+  font-size: 12px;
+  color: #666;
+}
+
+.flight-time {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.flight-city {
+  font-size: 14px;
+  color: #666;
+}
+
+.flight-duration {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.flight-line {
+  height: 2px;
+  background-color: #e0e0e0;
+  position: relative;
+  margin: 5px 0;
+}
+
+.flight-line:after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  right: 0;
+  height: 10px;
+  width: 10px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+}
+
+.flight-type {
+  font-size: 12px;
+  color: #666;
+}
+
+.flight-price {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.price-label {
+  font-size: 12px;
+  color: #666;
+}
+
+.book-btn {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 24px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.book-btn:hover {
+  background-color: #0d66da;
+}
+
+.no-flights-message {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  color: #666;
+}

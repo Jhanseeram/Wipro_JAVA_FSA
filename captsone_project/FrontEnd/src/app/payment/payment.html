@@ -1,0 +1,171 @@
+<div class="payment-container">
+  <div class="payment-header">
+    <h2>Complete Your Payment</h2>
+    <p>You're just one step away from confirming your booking!</p>
+  </div>
+
+  <div class="booking-summary" *ngIf="bookingData">
+    <h3>Booking Summary</h3>
+    <div class="flight-info">
+      <div class="route">
+        <strong>{{ bookingData.fromLocation }} → {{ bookingData.toLocation }}</strong>
+      </div>
+      <div class="passenger-info">
+        <p><strong>Passenger:</strong> 
+          {{ bookingData.passengerDetails?.name || bookingData.passengerName || 'N/A' }}
+        </p>
+        <p><strong>Passengers:</strong> {{ bookingData.noOfPassengers || 1 }}</p>
+        <p><strong>Date:</strong> {{ bookingData.bookingDate || bookingData.departureDate }}</p>
+        <p><strong>Email:</strong> {{ bookingData.passengerDetails?.email || 'N/A' }}</p>
+        <p><strong>Phone:</strong> {{ bookingData.passengerDetails?.phone || 'N/A' }}</p>
+      </div>
+      <div class="total-amount">
+        <h3>Total Amount: ₹{{ bookingData.price }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="payment-methods">
+    <h3>Select Payment Method</h3>
+    <div class="payment-options">
+      <div 
+        *ngFor="let method of paymentMethods" 
+        class="payment-option"
+        [class.selected]="selectedPaymentMethod === method.id"
+        (click)="selectPaymentMethod(method.id)"
+      >
+        <div class="payment-icon">{{ method.icon }}</div>
+        <div class="payment-name">{{ method.name }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="payment-details" *ngIf="selectedPaymentMethod === 'card'">
+    <h4>Card Details</h4>
+    <form [formGroup]="cardForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Card Number <span class="required">*</span></label>
+          <input 
+            type="text" 
+            formControlName="cardNumber"
+            placeholder="Enter card number" 
+            (input)="formatCardNumber($event)"
+            [class.error]="getCardNumberErrors()"
+          >
+          <div class="error-message" *ngIf="getCardNumberErrors()">
+            {{ getCardNumberErrors() }}
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group half">
+          <label>Expiry Date <span class="required">*</span></label>
+          <input 
+            type="text" 
+            formControlName="expiryDate"
+            placeholder="MM/YY" 
+            maxlength="5"
+            (input)="formatExpiryDate($event)"
+            [class.error]="getExpiryDateErrors()"
+          >
+          <div class="error-message" *ngIf="getExpiryDateErrors()">
+            {{ getExpiryDateErrors() }}
+          </div>
+        </div>
+        <div class="form-group half">
+          <label>CVV <span class="required">*</span></label>
+          <input 
+            type="password" 
+            formControlName="cvv"
+            placeholder="123" 
+            maxlength="4"
+            [class.error]="getCvvErrors()"
+          >
+          <div class="error-message" *ngIf="getCvvErrors()">
+            {{ getCvvErrors() }}
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Cardholder Name <span class="required">*</span></label>
+          <input 
+            type="text" 
+            formControlName="cardholderName"
+            placeholder="Name as on card"
+            [class.error]="getCardholderNameErrors()"
+          >
+          <div class="error-message" *ngIf="getCardholderNameErrors()">
+            {{ getCardholderNameErrors() }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="payment-details" *ngIf="selectedPaymentMethod === 'upi'">
+    <h4>UPI Payment</h4>
+    <form [formGroup]="upiForm">
+      <div class="form-group">
+        <label>UPI ID <span class="required">*</span></label>
+        <input 
+          type="text" 
+          formControlName="upiId"
+          placeholder="Enter UPI ID (e.g., user@paytm)"
+          [class.error]="getUpiIdErrors()"
+        >
+        <div class="error-message" *ngIf="getUpiIdErrors()">
+          {{ getUpiIdErrors() }}
+        </div>
+      </div>
+      <p class="upi-info">Or scan QR code with your UPI app</p>
+      <div class="qr-placeholder">📱 QR Code</div>
+    </form>
+  </div>
+
+  <div class="payment-details" *ngIf="selectedPaymentMethod === 'wallet'">
+    <h4>Digital Wallet</h4>
+    <div class="wallet-options">
+      <button class="wallet-btn">PayTM</button>
+      <button class="wallet-btn">PhonePe</button>
+      <button class="wallet-btn">Google Pay</button>
+      <button class="wallet-btn">Amazon Pay</button>
+    </div>
+  </div>
+
+  <div class="payment-details" *ngIf="selectedPaymentMethod === 'netbanking'">
+    <h4>Net Banking</h4>
+    <form [formGroup]="netBankingForm">
+      <div class="form-group">
+        <label>Select Bank <span class="required">*</span></label>
+        <select 
+          formControlName="bankName"
+          [class.error]="getBankNameErrors()"
+        >
+          <option value="">Select your bank</option>
+          <option value="sbi">State Bank of India</option>
+          <option value="hdfc">HDFC Bank</option>
+          <option value="icici">ICICI Bank</option>
+          <option value="axis">Axis Bank</option>
+          <option value="pnb">Punjab National Bank</option>
+        </select>
+        <div class="error-message" *ngIf="getBankNameErrors()">
+          {{ getBankNameErrors() }}
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="payment-actions">
+    <button class="back-btn" (click)="goBack()">Back to Booking</button>
+    <button 
+      class="pay-btn" 
+      (click)="processPayment()" 
+      [disabled]="isProcessing"
+    >
+      <span *ngIf="!isProcessing">Pay ₹{{ bookingData?.price }}</span>
+      <span *ngIf="isProcessing">Processing... 🔄</span>
+    </button>
+  </div>
+</div>

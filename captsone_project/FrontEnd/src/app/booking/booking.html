@@ -1,0 +1,146 @@
+<div class="booking-container">
+  <div class="flight-ticket">
+    <div class="ticket-header">
+      <h2>{{fromLocation}} → {{toLocation}}</h2>
+      <div class="flight-date">Thursday, Aug 15</div>
+      <div class="flight-type">Non Stop · {{duration}}</div>
+    </div>
+
+    <div class="airline-info">
+      <div class="airline-logo">AI</div>
+      <div class="airline-details">
+        <div class="airline-name">Air India</div>
+        <div class="flight-number">AI 785</div>
+        <div class="aircraft-type">Airbus A320 N</div>
+      </div>
+    </div>
+
+    <div class="flight-details">
+      <div class="departure">
+        <div class="time">17:00</div>
+        <div class="location">{{fromLocation}}</div>
+        <div class="airport">Netaji Subhash Chandra Bose International Airport</div>
+      </div>
+
+      <div class="duration-line">
+        <div class="duration">{{duration}}</div>
+      </div>
+
+      <div class="arrival">
+        <div class="time">19:30</div>
+        <div class="location">{{toLocation}}</div>
+        <div class="airport">Chennai International Airport, Terminal T4</div>
+      </div>
+    </div>
+
+    <div class="baggage-info">
+      <div class="cabin-baggage">
+        <i class="baggage-icon">✓</i>
+        <span>Cabin Baggage: 7 Kgs / Adult</span>
+      </div>
+      <div class="check-in-baggage">
+        <i class="baggage-icon">✓</i>
+        <span>Check-In Baggage: 15 Kgs / Adult</span>
+      </div>
+    </div>
+
+    <div class="ticket-footer">
+      <div class="price-section">
+        <div class="price-label">Total Amount</div>
+        <div class="price-amount">₹ {{price}}</div>
+      </div>
+      <button 
+        class="pay-button" 
+        (click)="proceedToPayment()"
+        type="button"
+        [disabled]="isSubmitted && bookingForm.invalid"
+      >
+        PROCEED TO PAY
+      </button>
+    </div>
+  </div>
+
+  <div class="passenger-details">
+    <h3>Passenger Details</h3>
+    <form [formGroup]="bookingForm" (ngSubmit)="proceedToPayment()">>>
+      <div class="form-group">
+        <label for="noOfPassengers">Number of Passengers: <span class="required">*</span></label>
+        <input 
+          type="number" 
+          id="noOfPassengers" 
+          formControlName="noOfPassengers"
+          class="form-control"
+          [class.is-invalid]="(noOfPassengers.invalid && (noOfPassengers.dirty || noOfPassengers.touched || isSubmitted))"
+          min="1" 
+          max="4"
+        />
+        <div class="invalid-feedback" *ngIf="getPassengerCountErrors()">
+          {{ getPassengerCountErrors() }}
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="passengerName">Passenger Name: <span class="required">*</span></label>
+        <input 
+          type="text" 
+          id="passengerName" 
+          formControlName="passengerName" 
+          class="form-control"
+          [class.is-invalid]="(passengerName.invalid && (passengerName.dirty || passengerName.touched || isSubmitted))"
+          placeholder="Enter full name as per ID"
+          maxlength="50"
+        />
+        <div class="invalid-feedback" *ngIf="getPassengerNameErrors()">
+          {{ getPassengerNameErrors() }}
+        </div>
+        <small class="form-text text-muted">Name should match your government ID</small>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address: <span class="required">*</span></label>
+        <input 
+          type="email" 
+          id="email" 
+          formControlName="email" 
+          class="form-control"
+          [class.is-invalid]="(email.invalid && (email.dirty || email.touched || isSubmitted))"
+          placeholder="example@email.com"
+          maxlength="100"
+        />
+        <div class="invalid-feedback" *ngIf="getEmailErrors()">
+          {{ getEmailErrors() }}
+        </div>
+        <small class="form-text text-muted">Booking confirmation will be sent to this email</small>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Mobile Number: <span class="required">*</span></label>
+        <input 
+          type="tel" 
+          id="phone" 
+          formControlName="phone" 
+          class="form-control"
+          [class.is-invalid]="(phone.invalid && (phone.dirty || phone.touched || isSubmitted))"
+          placeholder="9876543210"
+          maxlength="10"
+        />
+        <div class="invalid-feedback" *ngIf="getPhoneErrors()">
+          {{ getPhoneErrors() }}
+        </div>
+        <small class="form-text text-muted">Enter 10-digit Indian mobile number without +91</small>
+      </div>
+      
+      <div class="form-validation-summary" *ngIf="isSubmitted && bookingForm.invalid">
+        <div class="alert alert-danger">
+          <strong>Please fix the following errors:</strong>
+          <ul>
+            <li *ngIf="getPassengerCountErrors()">{{ getPassengerCountErrors() }}</li>
+            <li *ngIf="getPassengerNameErrors()">{{ getPassengerNameErrors() }}</li>
+            <li *ngIf="getEmailErrors()">{{ getEmailErrors() }}</li>
+            <li *ngIf="getPhoneErrors()">{{ getPhoneErrors() }}</li>
+          </ul>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+<div class="container mt-4">
+  <!-- Search Summary -->
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="search-summary">
+        <h4>Flights from {{ fromLocation }} to {{ toLocation }}</h4>
+        <p class="text-muted">{{ departureWeekday }}, {{ departureDay }} {{ departureMonthYear }} • {{ getTripTypeText() }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <!-- Left sidebar with filters -->
+    <div class="col-md-3">
+      <div class="filters-container">
+        <!-- Applied Filters -->
+        <div class="applied-filters mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="filter-heading">Applied Filters</h5>
+            <button class="clear-btn" (click)="clearAllFilters()">CLEAR ALL</button>
+          </div>
+          
+          <div class="filter-tag" *ngIf="appliedFilters.nonStop">
+            <span>NON STOP</span>
+            <button class="btn-close ms-2" aria-label="Close" (click)="toggleFilter('Non Stop')"></button>
+          </div>
+        </div>
+        
+        <!-- Popular Filters -->
+        <div class="popular-filters">
+          <h5 class="filter-heading">Popular Filters</h5>
+          <div class="filter-list">
+            <div class="filter-item" *ngFor="let filter of filters">
+              <div class="form-check d-flex justify-content-between align-items-center">
+                <div>
+                  <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    [id]="filter.name.replace(' ', '')" 
+                    [checked]="filter.value"
+                    (change)="toggleFilter(filter.name)"
+                  >
+                  <label class="form-check-label" [for]="filter.name.replace(' ', '')">
+                    <img *ngIf="filter.name === 'IndiGo'" src="assets/indigo-logo.svg" class="airline-logo" alt="IndiGo">
+                    {{ filter.name }}
+                  </label>
+                </div>
+                <span class="filter-price">₹{{ getDisplayPrice(filter.price || 0) }}</span>
+              </div>
+            </div>
+            
+            <button class="more-filters-btn">+ 4 more</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right side with flight results -->
+    <div class="col-md-9">
+      <div class="flight-list">
+        <!-- Flight card for each result -->
+        <div class="flight-card" *ngFor="let flight of filteredFlights">
+          <div class="row align-items-center">
+            <!-- Airline info -->
+            <div class="col-md-2 text-center">
+              <img 
+                [src]="flight.airline === 'IndiGo' ? 'assets/indigo-logo.svg' : 'assets/air-india-logo.svg'" 
+                class="airline-logo-lg" 
+                [alt]="flight.airline">
+              <div class="flight-number">{{ flight.flightNumber }}</div>
+            </div>
+            
+            <!-- Departure info -->
+            <div class="col-md-2 text-center">
+              <div class="flight-time">{{ flight.departureTime }}</div>
+              <div class="flight-city">{{ flight.departureCity }}</div>
+            </div>
+            
+            <!-- Flight duration -->
+            <div class="col-md-2 text-center">
+              <div class="flight-duration">{{ flight.duration }}</div>
+              <div class="flight-line"></div>
+              <div class="flight-type">{{ flight.nonStop ? 'Non stop' : 'With stops' }}</div>
+            </div>
+            
+            <!-- Arrival info -->
+            <div class="col-md-2 text-center">
+              <div class="flight-time">{{ flight.arrivalTime }}</div>
+              <div class="flight-city">{{ flight.arrivalCity }}</div>
+            </div>
+            
+            <!-- Price info -->
+            <div class="col-md-2 text-center">
+              <div class="flight-price">₹ {{ getDisplayPrice(flight.price) }}</div>
+              <div class="price-label">per adult {{ tripType === 'round' ? '(round trip)' : '' }}</div>
+            </div>
+            
+            <!-- Book button -->
+            <div class="col-md-2 text-center">
+              <button class="btn book-btn" (click)="bookFlight(flight)">Book</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Empty state if no flights -->
+        <div class="no-flights-message" *ngIf="filteredFlights.length === 0">
+          <p>No flights match your current filters. Try adjusting your filters to see more results.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
