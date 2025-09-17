@@ -1,0 +1,4 @@
+com\wipro\controller\FlightController.class
+com\wipro\service\FlightService.class
+com\wipro\repository\FlightRepository.class
+com\wipro\entity\Flight.class

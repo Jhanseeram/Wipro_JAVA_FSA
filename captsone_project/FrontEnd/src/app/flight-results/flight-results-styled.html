@@ -1,0 +1,87 @@
+<div class="flight-results-container">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Left sidebar -->
+      <div class="col-md-3">
+        <div class="filter-sidebar">
+          <div class="filter-header">
+            <h5>Filters</h5>
+            <button class="btn clear-all-btn" (click)="clearAllFilters()">Clear All</button>
+          </div>
+          
+          <!-- Non Stop Filter -->
+          <div class="filter-section">
+            <h6>Stops</h6>
+            <div class="filter-option">
+              <label class="filter-checkbox">
+                <input type="checkbox" [(ngModel)]="appliedFilters.nonStop" (change)="applyFilters()">
+                <span class="checkmark"></span>
+                Non Stop
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Main results -->
+      <div class="col-md-9">
+        <div class="results-header">
+          <h4>{{ fromLocation }} → {{ toLocation }}</h4>
+          <p>{{ departureWeekday }}, {{ departureDay }} {{ departureMonthYear }}</p>
+        </div>
+        
+        <!-- Flight Results -->
+        <div class="flight-results">
+          <!-- Flight card for each result -->
+          <div class="flight-card" *ngFor="let flight of filteredFlights; trackBy: trackByFlight">
+            <div class="row align-items-center">
+              <!-- Airline info -->
+              <div class="col-md-2 text-center">
+                <img 
+                  [src]="flight.airline === 'IndiGo' ? '/assets/indigo-logo.svg' : '/assets/air-india-logo.svg'" 
+                  class="airline-logo-lg" 
+                  [alt]="flight.airline">
+                <div class="flight-number">{{ flight.flightNumber }}</div>
+              </div>
+              
+              <!-- Departure info -->
+              <div class="col-md-2 text-center">
+                <div class="flight-time">{{ flight.departureTime }}</div>
+                <div class="flight-city">{{ flight.departureCity }}</div>
+              </div>
+              
+              <!-- Flight duration -->
+              <div class="col-md-2 text-center">
+                <div class="flight-duration">{{ flight.duration }}</div>
+                <div class="flight-line"></div>
+                <div class="flight-type">{{ flight.nonStop ? 'Non stop' : 'With stops' }}</div>
+              </div>
+              
+              <!-- Arrival info -->
+              <div class="col-md-2 text-center">
+                <div class="flight-time">{{ flight.arrivalTime }}</div>
+                <div class="flight-city">{{ flight.arrivalCity }}</div>
+              </div>
+              
+              <!-- Price info -->
+              <div class="col-md-2 text-center">
+                <div class="flight-price">₹ {{ getDisplayPrice(flight.price) }}</div>
+                <div class="price-label">per adult {{ tripType === 'round' ? '(round trip)' : '' }}</div>
+              </div>
+              
+              <!-- Book button -->
+              <div class="col-md-2 text-center">
+                <button class="btn book-btn" (click)="bookFlight(flight)">Book</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Empty state if no flights -->
+          <div class="no-flights-message" *ngIf="filteredFlights.length === 0">
+            <p>No flights match your current filters. Try adjusting your filters to see more results.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

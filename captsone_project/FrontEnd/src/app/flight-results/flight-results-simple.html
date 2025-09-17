@@ -1,0 +1,63 @@
+<div class="flight-results-container">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Left sidebar -->
+      <div class="col-md-3">
+        <div class="filter-sidebar">
+          <div class="filter-header">
+            <h5>Filters</h5>
+            <button class="btn clear-all-btn" (click)="clearAllFilters()">Clear All</button>
+          </div>
+          
+          <!-- Non Stop Filter -->
+          <div class="filter-section">
+            <h6>Stops</h6>
+            <div class="filter-option">
+              <label class="filter-checkbox">
+                <input type="checkbox" [(ngModel)]="appliedFilters.nonStop" (change)="applyFilters()">
+                <span class="checkmark"></span>
+                Non Stop
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Main results -->
+      <div class="col-md-9">
+        <div class="results-header">
+          <h4>{{ fromLocation }} → {{ toLocation }}</h4>
+          <p>{{ departureWeekday }}, {{ departureDay }} {{ departureMonthYear }}</p>
+        </div>
+        
+        <!-- DEBUG INFO -->
+        <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; border: 1px solid #ccc;">
+          <strong>DEBUG INFO:</strong><br>
+          Flights array length: {{ flights.length }}<br>
+          FilteredFlights length: {{ filteredFlights.length }}<br>
+          Trip type: {{ tripType }}<br>
+        </div>
+        
+        <!-- Flight Results -->
+        <div class="flight-results">
+          <!-- Flight card for each result -->
+          <div class="flight-card" *ngFor="let flight of filteredFlights; trackBy: trackByFlight">
+            <!-- SIMPLIFIED DISPLAY FOR DEBUGGING -->
+            <div style="border: 2px solid red; padding: 10px; margin: 10px;">
+              <h3>{{ flight.flightNumber }} - {{ flight.airline }}</h3>
+              <p>{{ flight.departureCity }} → {{ flight.arrivalCity }}</p>
+              <p>{{ flight.departureTime }} - {{ flight.arrivalTime }}</p>
+              <p>Price: ₹{{ flight.price }}</p>
+              <button (click)="bookFlight(flight)" class="btn btn-primary">Book Flight</button>
+            </div>
+          </div>
+          
+          <!-- Empty state if no flights -->
+          <div class="no-flights-message" *ngIf="filteredFlights.length === 0">
+            <p>No flights match your current filters. Try adjusting your filters to see more results.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

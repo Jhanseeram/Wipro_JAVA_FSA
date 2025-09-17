@@ -1,0 +1,167 @@
+<div class="payment-container">
+  <!-- Payment Details Section -->
+  <div class="payment-details-section" *ngIf="bookingData">
+    <div class="payment-details-card">
+      <h2>Payment Details</h2>
+      
+      <div class="booking-summary-card">
+        <h3>Booking Summary</h3>
+        <div class="summary-item">
+          <span class="label">Booking ID:</span>
+          <span class="value">{{ bookingData.bookingId || generateBookingId() }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Flight:</span>
+          <span class="value">{{ bookingData.flightNumber || '6E-234' }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Route:</span>
+          <span class="value">{{ bookingData.fromLocation }} → {{ bookingData.toLocation }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Passenger:</span>
+          <span class="value">{{ bookingData.passengerName || 'N/A' }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Total Amount:</span>
+          <span class="value amount">₹{{ bookingData.price || 0 }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Method Section -->
+  <div class="payment-method-section">
+    <h3>Payment Method</h3>
+    <div class="payment-method-options">
+      <div class="payment-option">
+        <input type="radio" id="credit-card" name="paymentMethod" value="card" 
+               [(ngModel)]="selectedPaymentMethod" (change)="selectPaymentMethod('card')">
+        <label for="credit-card">Credit Card</label>
+      </div>
+      <div class="payment-option">
+        <input type="radio" id="debit-card" name="paymentMethod" value="debit" 
+               [(ngModel)]="selectedPaymentMethod" (change)="selectPaymentMethod('debit')">
+        <label for="debit-card">Debit Card</label>
+      </div>
+      <div class="payment-option">
+        <input type="radio" id="upi" name="paymentMethod" value="upi" 
+               [(ngModel)]="selectedPaymentMethod" (change)="selectPaymentMethod('upi')">
+        <label for="upi">UPI</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card Details Section -->
+  <div class="card-details-section" *ngIf="selectedPaymentMethod === 'card' || selectedPaymentMethod === 'debit'">
+    <h3>Card Details</h3>
+    <form [formGroup]="cardForm" class="card-form">
+      <div class="form-group">
+        <label for="cardNumber">Card Number *</label>
+        <input 
+          type="text" 
+          id="cardNumber" 
+          formControlName="cardNumber" 
+          placeholder="1234 5678 9012 3456"
+          maxlength="19"
+          class="form-control"
+          [class.error]="cardNumber.invalid && (cardNumber.dirty || cardNumber.touched || isSubmitted)">
+        <div class="error-message" *ngIf="getCardNumberErrors()">
+          {{ getCardNumberErrors() }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="cardholderName">Card Holder Name *</label>
+        <input 
+          type="text" 
+          id="cardholderName" 
+          formControlName="cardholderName" 
+          placeholder="John Doe"
+          class="form-control"
+          [class.error]="cardholderName.invalid && (cardholderName.dirty || cardholderName.touched || isSubmitted)">
+        <div class="error-message" *ngIf="getCardholderNameErrors()">
+          {{ getCardholderNameErrors() }}
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group half-width">
+          <label for="expiryDate">Expiry Date *</label>
+          <input 
+            type="text" 
+            id="expiryDate" 
+            formControlName="expiryDate" 
+            placeholder="MM/YY"
+            maxlength="5"
+            class="form-control"
+            [class.error]="expiryDate.invalid && (expiryDate.dirty || expiryDate.touched || isSubmitted)">
+          <div class="error-message" *ngIf="getExpiryDateErrors()">
+            {{ getExpiryDateErrors() }}
+          </div>
+        </div>
+
+        <div class="form-group half-width">
+          <label for="cvv">CVV *</label>
+          <input 
+            type="text" 
+            id="cvv" 
+            formControlName="cvv" 
+            placeholder="123"
+            maxlength="4"
+            class="form-control"
+            [class.error]="cvv.invalid && (cvv.dirty || cvv.touched || isSubmitted)">
+          <div class="error-message" *ngIf="getCvvErrors()">
+            {{ getCvvErrors() }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- UPI Details Section -->
+  <div class="upi-details-section" *ngIf="selectedPaymentMethod === 'upi'">
+    <h3>UPI Details</h3>
+    <form [formGroup]="upiForm" class="upi-form">
+      <div class="form-group">
+        <label for="upiId">UPI ID *</label>
+        <input 
+          type="text" 
+          id="upiId" 
+          formControlName="upiId" 
+          placeholder="yourname@paytm"
+          class="form-control"
+          [class.error]="upiId.invalid && (upiId.dirty || upiId.touched || isSubmitted)">
+        <div class="error-message" *ngIf="getUpiIdErrors()">
+          {{ getUpiIdErrors() }}
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="action-buttons">
+    <button type="button" class="btn btn-secondary" (click)="goBackToBooking()">
+      Back to Booking
+    </button>
+    <button 
+      type="button" 
+      class="btn btn-primary payment-btn" 
+      (click)="processPayment()"
+      [disabled]="isProcessing">
+      <span *ngIf="!isProcessing">Pay ₹{{ bookingData?.price || 0 }}</span>
+      <span *ngIf="isProcessing">Processing...</span>
+    </button>
+  </div>
+
+  <!-- Error Message -->
+  <div class="error-section" *ngIf="!bookingData">
+    <div class="alert alert-danger">
+      <h4>No Booking Data Found</h4>
+      <p>Please go back to the booking page and enter your details.</p>
+      <button type="button" class="btn btn-primary" (click)="goBackToBooking()">
+        Go Back to Booking
+      </button>
+    </div>
+  </div>
+</div>
